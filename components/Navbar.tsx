@@ -61,10 +61,12 @@ export default function Navbar() {
 
               {/* CTA with coral underline expand */}
               <a
-                href="#contact"
+                href="https://www.fiverr.com/ppt_world"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="relative text-xs font-sans font-medium uppercase tracking-widest text-coral group"
               >
-                Start a Project
+                Order on Fiverr
                 <span className="absolute left-0 -bottom-1 h-px bg-coral w-0 group-hover:w-full transition-all duration-500 ease-[var(--ease-out-expo)]" />
               </a>
             </div>
@@ -142,14 +144,16 @@ export default function Navbar() {
               />
 
               <motion.a
-                href="#contact"
+                href="https://www.fiverr.com/ppt_world"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={() => setMobileOpen(false)}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: 0.5 }}
                 className="text-coral font-display text-xl sm:text-2xl font-semibold"
               >
-                Start a Project
+                Order on Fiverr
               </motion.a>
             </div>
           </motion.div>

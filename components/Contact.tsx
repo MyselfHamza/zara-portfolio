@@ -1,37 +1,14 @@
-"use client";
-
-import { useState, FormEvent } from "react";
 import Reveal from "@/components/RevealOnScroll";
 
-const serviceOptions = [
-  "Pitch Decks",
-  "Corporate Presentations",
-  "Brand Identity",
-  "Infographics & Data Viz",
-  "Social & Marketing",
-  "Design Consultation",
+const FIVERR_URL = "https://www.fiverr.com/ppt_world";
+
+const services = [
+  { title: "Pitch Deck Design", desc: "Investor & startup pitch decks", price: "From £52" },
+  { title: "Presentation Templates", desc: "PowerPoint, Google Slides, Figma, Canva", price: "From £48" },
+  { title: "One-Pager & Reports", desc: "Executive summaries & business pitches", price: "From £24" },
 ];
 
 export default function Contact() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    service: "",
-    message: "",
-  });
-
-  function handleChange(
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
-  ) {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  }
-
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-  }
-
   return (
     <section id="contact" className="bg-surface section-padding">
       <div className="container-narrow">
@@ -39,13 +16,11 @@ export default function Contact() {
           {/* Left column */}
           <Reveal>
             <div>
-              {/* Badge */}
               <div className="section-badge">
                 <span className="w-2 h-2 rounded-full bg-coral" />
-                Contact
+                Work With Me
               </div>
 
-              {/* Heading */}
               <h2 className="mt-6 responsive-heading">
                 <span className="font-display font-light text-foreground/30">
                   Let&apos;s{" "}
@@ -56,139 +31,77 @@ export default function Contact() {
               </h2>
 
               <p className="mt-6 font-sans text-muted leading-relaxed max-w-md">
-                Have a project in mind? I&apos;d love to hear about it.
-                Let&apos;s turn your ideas into presentations that make an
-                impact.
+                Ready to transform your ideas into stunning presentations?
+                Place your order on Fiverr and let&apos;s get started. Average
+                response time: 1 hour.
               </p>
 
-              {/* Contact items */}
-              <div className="mt-6 sm:mt-8 flex flex-col gap-4">
-                <p className="font-sans text-sm text-foreground">
-                  <span className="text-coral mr-2">&rarr;</span>
+              <div className="mt-6 sm:mt-8 flex flex-col gap-3">
+                <div className="flex items-center gap-3 text-sm text-muted">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-coral shrink-0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  4.9 rating from 348+ reviews
+                </div>
+                <div className="flex items-center gap-3 text-sm text-muted">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-coral shrink-0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  Fiverr Level 2 Seller
+                </div>
+                <div className="flex items-center gap-3 text-sm text-muted">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-coral shrink-0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                   Available worldwide, remote collaboration
-                </p>
-                <p className="font-sans text-sm text-foreground">
-                  <span className="text-coral mr-2">&rarr;</span>
-                  hello@zaradesigns.com
-                </p>
+                </div>
+                <div className="flex items-center gap-3 text-sm text-muted">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-coral shrink-0"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  English, German &amp; French
+                </div>
+              </div>
+
+              <a
+                href={FIVERR_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-8 inline-flex items-center gap-2 bg-coral text-white font-sans font-semibold text-sm px-7 py-3.5 rounded-full hover:bg-coral-dark hover:shadow-lg hover:shadow-coral/20 transition-all duration-300"
+              >
+                View my Fiverr profile
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+              </a>
+            </div>
+          </Reveal>
+
+          {/* Right column — Service cards */}
+          <div className="flex flex-col gap-4">
+            {services.map((svc, i) => (
+              <Reveal key={svc.title} delay={i * 120} className="from-right">
                 <a
-                  href="https://www.fiverr.com/ppt_world"
+                  href={FIVERR_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-sans text-sm text-foreground hover:text-coral transition-colors"
+                  className="group block bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-500 border border-border/50 hover:border-coral/20"
                 >
-                  <span className="text-coral mr-2">&rarr;</span>
-                  fiverr.com/ppt_world
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h3 className="font-serif italic text-xl sm:text-2xl text-foreground group-hover:text-coral transition-colors">
+                        {svc.title}
+                      </h3>
+                      <p className="mt-2 font-sans text-sm text-muted">{svc.desc}</p>
+                    </div>
+                    <div className="shrink-0 text-right">
+                      <span className="font-serif italic text-2xl sm:text-3xl text-gold">{svc.price}</span>
+                    </div>
+                  </div>
+                  <div className="mt-4 flex items-center gap-2 text-coral text-xs font-sans font-semibold uppercase tracking-wider">
+                    Order on Fiverr
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="group-hover:translate-x-1 transition-transform"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </div>
                 </a>
-              </div>
-            </div>
-          </Reveal>
+              </Reveal>
+            ))}
 
-          {/* Right column — Form */}
-          <Reveal className="from-right">
-            <div className="bg-white rounded-2xl p-6 sm:p-10 shadow-xl">
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5 sm:gap-6">
-                {/* Name + Email row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label
-                      htmlFor="contact-name"
-                      className="block font-sans text-sm font-medium text-foreground mb-1"
-                    >
-                      Name
-                    </label>
-                    <input
-                      id="contact-name"
-                      name="name"
-                      type="text"
-                      value={form.name}
-                      onChange={handleChange}
-                      placeholder="Your name"
-                      required
-                      className="w-full min-h-[44px] font-sans border-b-2 border-border focus:border-coral bg-transparent py-3 outline-none transition-colors placeholder:text-muted/50"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="contact-email"
-                      className="block font-sans text-sm font-medium text-foreground mb-1"
-                    >
-                      Email
-                    </label>
-                    <input
-                      id="contact-email"
-                      name="email"
-                      type="email"
-                      value={form.email}
-                      onChange={handleChange}
-                      placeholder="you@company.com"
-                      required
-                      className="w-full min-h-[44px] font-sans border-b-2 border-border focus:border-coral bg-transparent py-3 outline-none transition-colors placeholder:text-muted/50"
-                    />
-                  </div>
-                </div>
-
-                {/* Service select */}
-                <div>
-                  <label
-                    htmlFor="contact-service"
-                    className="block font-sans text-sm font-medium text-foreground mb-1"
-                  >
-                    Service
-                  </label>
-                  <select
-                    id="contact-service"
-                    name="service"
-                    value={form.service}
-                    onChange={handleChange}
-                    required
-                    className="w-full min-h-[44px] font-sans border-b-2 border-border focus:border-coral bg-transparent py-3 outline-none transition-colors text-foreground appearance-none cursor-pointer"
-                  >
-                    <option value="" disabled>
-                      Select a service...
-                    </option>
-                    {serviceOptions.map((opt) => (
-                      <option key={opt} value={opt}>
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Message */}
-                <div>
-                  <label
-                    htmlFor="contact-message"
-                    className="block font-sans text-sm font-medium text-foreground mb-1"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="contact-message"
-                    name="message"
-                    value={form.message}
-                    onChange={handleChange}
-                    placeholder="Tell me about your project..."
-                    rows={5}
-                    required
-                    className="w-full font-sans border-b-2 border-border focus:border-coral bg-transparent py-3 outline-none transition-colors resize-none placeholder:text-muted/50"
-                  />
-                </div>
-
-                {/* Submit */}
-                <button
-                  type="submit"
-                  className="w-full py-3 sm:py-4 bg-coral text-white rounded-xl font-display font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-coral-dark hover:shadow-lg hover:shadow-coral/20 cursor-pointer"
-                >
-                  Send Message
-                </button>
-
-                <p className="text-center text-muted text-xs">
-                  Typically responds within 1 hour
-                </p>
-              </form>
-            </div>
-          </Reveal>
+            <Reveal delay={400}>
+              <p className="text-center text-muted text-xs mt-2">
+                All orders are placed securely through Fiverr with buyer protection
+              </p>
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>

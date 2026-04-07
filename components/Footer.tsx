@@ -48,10 +48,12 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 <li>
                   <a
-                    href="mailto:hello@zaradesigns.com"
+                    href="https://www.fiverr.com/ppt_world"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="font-sans text-white/30 text-xs hover:text-white/60 transition-colors"
                   >
-                    hello@zaradesigns.com
+                    Order on Fiverr
                   </a>
                 </li>
                 <li>
@@ -98,10 +100,12 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#contact"
+                    href="https://www.fiverr.com/ppt_world"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="font-sans text-white/30 text-xs hover:text-white/60 transition-colors"
                   >
-                    Get in Touch
+                    Order on Fiverr
                   </a>
                 </li>
               </ul>

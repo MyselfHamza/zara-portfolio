@@ -97,10 +97,12 @@ export default function Hero() {
               </svg>
             </a>
             <a
-              href="#contact"
+              href="https://www.fiverr.com/ppt_world"
+              target="_blank"
+              rel="noopener noreferrer"
               className="font-sans text-sm font-medium text-white/40 hover:text-white/70 transition-colors"
             >
-              Get in touch
+              Order on Fiverr
             </a>
           </div>
         </motion.div>
