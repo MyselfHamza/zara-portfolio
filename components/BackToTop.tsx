@@ -29,10 +29,10 @@ export default function BackToTop() {
           transition={{ type: "spring", stiffness: 300, damping: 20 }}
           onClick={scrollToTop}
           aria-label="Back to top"
-          className="fixed bottom-8 right-8 z-50 w-11 h-11 rounded-full bg-violet-dark text-white shadow-lg border border-white/10 flex items-center justify-center transition-colors duration-300 hover:bg-coral cursor-pointer"
+          className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-violet-dark text-white shadow-lg border border-white/10 flex items-center justify-center transition-colors duration-300 hover:bg-coral cursor-pointer"
         >
           <svg
-            className="w-5 h-5"
+            className="w-4 h-4 sm:w-5 sm:h-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

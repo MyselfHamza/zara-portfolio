@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { navItems } from "@/data/content";
 
 export default function Navbar() {
@@ -17,7 +17,9 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [mobileOpen]);
 
   return (
@@ -32,12 +34,11 @@ export default function Navbar() {
             : "bg-transparent"
         }`}
       >
-        <div className="container-narrow">
-          <div className="flex items-center justify-between h-[72px]">
-
+        <div className="container-narrow px-4 sm:px-6">
+          <div className="flex items-center justify-between h-[64px] sm:h-[72px]">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-3 group">
-              <span className="font-display text-sm font-[800] tracking-[0.2em] uppercase text-white">
+            <a href="#" className="flex items-center gap-2 sm:gap-3 group">
+              <span className="font-display text-xs sm:text-sm font-[800] tracking-[0.2em] uppercase text-white">
                 ZARA
               </span>
               <span className="hidden sm:block w-px h-4 bg-white/20" />
@@ -68,17 +69,19 @@ export default function Navbar() {
               </a>
             </div>
 
-            {/* Mobile Hamburger */}
+            {/* Mobile Hamburger - min 44x44 tap target */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden relative w-10 h-10 flex items-center justify-center z-[60]"
+              className="lg:hidden relative w-11 h-11 flex items-center justify-center z-[60]"
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
             >
               <div className="flex flex-col justify-center items-center w-6 h-6">
                 <span
                   className={`block h-px w-6 bg-white transition-all duration-300 ${
-                    mobileOpen ? "rotate-45 translate-y-[2px]" : "-translate-y-1.5"
+                    mobileOpen
+                      ? "rotate-45 translate-y-[2px]"
+                      : "-translate-y-1.5"
                   }`}
                 />
                 <span
@@ -88,7 +91,9 @@ export default function Navbar() {
                 />
                 <span
                   className={`block h-px w-6 bg-white transition-all duration-300 ${
-                    mobileOpen ? "-rotate-45 -translate-y-[2px]" : "translate-y-1.5"
+                    mobileOpen
+                      ? "-rotate-45 -translate-y-[2px]"
+                      : "translate-y-1.5"
                   }`}
                 />
               </div>
@@ -98,37 +103,58 @@ export default function Navbar() {
       </motion.nav>
 
       {/* Mobile Menu: Full-Screen Overlay */}
-      <div
-        className={`fixed inset-0 z-[55] bg-violet-dark transition-all duration-500 lg:hidden ${
-          mobileOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        }`}
-      >
-        {/* Noise overlay on mobile menu */}
-        <div className="noise-overlay" />
-
-        <div className="relative z-10 flex flex-col items-center justify-center h-full gap-6 px-8">
-          {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={() => setMobileOpen(false)}
-              className="mobile-link font-display text-3xl sm:text-4xl font-semibold text-white/90 hover:text-coral transition-colors"
-            >
-              {item.label}
-            </a>
-          ))}
-          <div className="mt-6 w-12 h-px bg-white/10" />
-          <a
-            href="#contact"
-            onClick={() => setMobileOpen(false)}
-            className="mobile-link text-coral font-display text-2xl font-semibold"
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-[55] bg-violet-dark lg:hidden"
           >
-            Start a Project
-          </a>
-        </div>
-      </div>
+            {/* Noise overlay on mobile menu */}
+            <div className="noise-overlay" />
+
+            <div className="relative z-10 flex flex-col items-center justify-center h-full gap-5 sm:gap-6 px-6 sm:px-8">
+              {navItems.map((item, i) => (
+                <motion.a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.4,
+                    delay: 0.1 + i * 0.06,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                  className="font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-white/90 hover:text-coral transition-colors"
+                >
+                  {item.label}
+                </motion.a>
+              ))}
+
+              <motion.div
+                initial={{ opacity: 0, scaleX: 0 }}
+                animate={{ opacity: 1, scaleX: 1 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="mt-4 w-12 h-px bg-white/10"
+              />
+
+              <motion.a
+                href="#contact"
+                onClick={() => setMobileOpen(false)}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.5 }}
+                className="text-coral font-display text-xl sm:text-2xl font-semibold"
+              >
+                Start a Project
+              </motion.a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

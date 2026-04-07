@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import Reveal from "@/components/RevealOnScroll";
 
 const serviceOptions = [
   "Pitch Decks",
@@ -20,7 +21,9 @@ export default function Contact() {
   });
 
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
@@ -32,54 +35,61 @@ export default function Contact() {
   return (
     <section id="contact" className="bg-surface section-padding">
       <div className="container-narrow">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* Left column */}
-          <div>
-            {/* Badge */}
-            <div className="section-badge">
-              <span className="w-2 h-2 rounded-full bg-coral" />
-              Contact
-            </div>
+          <Reveal>
+            <div>
+              {/* Badge */}
+              <div className="section-badge">
+                <span className="w-2 h-2 rounded-full bg-coral" />
+                Contact
+              </div>
 
-            {/* Heading */}
-            <h2 className="mt-6 text-5xl lg:text-7xl leading-[1.05]">
-              <span className="font-display font-light text-foreground/30">Let&apos;s </span>
-              <span className="font-display font-extrabold text-foreground">Create</span>
-            </h2>
+              {/* Heading */}
+              <h2 className="mt-6 responsive-heading">
+                <span className="font-display font-light text-foreground/30">
+                  Let&apos;s{" "}
+                </span>
+                <span className="font-display font-extrabold text-foreground">
+                  Create
+                </span>
+              </h2>
 
-            <p className="mt-6 font-sans text-muted leading-relaxed max-w-md">
-              Have a project in mind? I&apos;d love to hear about it. Let&apos;s
-              turn your ideas into presentations that make an impact.
-            </p>
-
-            {/* Contact items */}
-            <div className="mt-8 flex flex-col gap-4">
-              <p className="font-sans text-sm text-foreground">
-                <span className="text-coral mr-2">&rarr;</span>
-                Available worldwide, remote collaboration
+              <p className="mt-6 font-sans text-muted leading-relaxed max-w-md">
+                Have a project in mind? I&apos;d love to hear about it.
+                Let&apos;s turn your ideas into presentations that make an
+                impact.
               </p>
-              <p className="font-sans text-sm text-foreground">
-                <span className="text-coral mr-2">&rarr;</span>
-                hello@zaradesigns.com
-              </p>
-              <a
-                href="https://www.fiverr.com/ppt_world"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-sans text-sm text-foreground hover:text-coral transition-colors"
-              >
-                <span className="text-coral mr-2">&rarr;</span>
-                fiverr.com/ppt_world
-              </a>
+
+              {/* Contact items */}
+              <div className="mt-6 sm:mt-8 flex flex-col gap-4">
+                <p className="font-sans text-sm text-foreground">
+                  <span className="text-coral mr-2">&rarr;</span>
+                  Available worldwide, remote collaboration
+                </p>
+                <p className="font-sans text-sm text-foreground">
+                  <span className="text-coral mr-2">&rarr;</span>
+                  hello@zaradesigns.com
+                </p>
+                <a
+                  href="https://www.fiverr.com/ppt_world"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-sans text-sm text-foreground hover:text-coral transition-colors"
+                >
+                  <span className="text-coral mr-2">&rarr;</span>
+                  fiverr.com/ppt_world
+                </a>
+              </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* Right column — Form */}
-          <div>
-            <div className="bg-white rounded-2xl p-10 shadow-xl">
-              <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+          <Reveal className="from-right">
+            <div className="bg-white rounded-2xl p-6 sm:p-10 shadow-xl">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-5 sm:gap-6">
                 {/* Name + Email row */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label
                       htmlFor="contact-name"
@@ -95,7 +105,7 @@ export default function Contact() {
                       onChange={handleChange}
                       placeholder="Your name"
                       required
-                      className="w-full font-sans border-b-2 border-border focus:border-coral bg-transparent py-3 outline-none transition-colors placeholder:text-muted/50"
+                      className="w-full min-h-[44px] font-sans border-b-2 border-border focus:border-coral bg-transparent py-3 outline-none transition-colors placeholder:text-muted/50"
                     />
                   </div>
                   <div>
@@ -113,7 +123,7 @@ export default function Contact() {
                       onChange={handleChange}
                       placeholder="you@company.com"
                       required
-                      className="w-full font-sans border-b-2 border-border focus:border-coral bg-transparent py-3 outline-none transition-colors placeholder:text-muted/50"
+                      className="w-full min-h-[44px] font-sans border-b-2 border-border focus:border-coral bg-transparent py-3 outline-none transition-colors placeholder:text-muted/50"
                     />
                   </div>
                 </div>
@@ -132,7 +142,7 @@ export default function Contact() {
                     value={form.service}
                     onChange={handleChange}
                     required
-                    className="w-full font-sans border-b-2 border-border focus:border-coral bg-transparent py-3 outline-none transition-colors text-foreground appearance-none cursor-pointer"
+                    className="w-full min-h-[44px] font-sans border-b-2 border-border focus:border-coral bg-transparent py-3 outline-none transition-colors text-foreground appearance-none cursor-pointer"
                   >
                     <option value="" disabled>
                       Select a service...
@@ -168,7 +178,7 @@ export default function Contact() {
                 {/* Submit */}
                 <button
                   type="submit"
-                  className="w-full py-4 bg-coral text-white rounded-xl font-display font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-coral-dark hover:shadow-lg hover:shadow-coral/20 cursor-pointer"
+                  className="w-full py-3 sm:py-4 bg-coral text-white rounded-xl font-display font-semibold uppercase tracking-wider transition-all duration-300 hover:bg-coral-dark hover:shadow-lg hover:shadow-coral/20 cursor-pointer"
                 >
                   Send Message
                 </button>
@@ -178,7 +188,7 @@ export default function Contact() {
                 </p>
               </form>
             </div>
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

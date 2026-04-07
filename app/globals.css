@@ -249,6 +249,72 @@ a, button {
 .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
 
 /* ============================================
+   SCROLL REVEAL ANIMATIONS
+   ============================================ */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variant: from left */
+.reveal-on-scroll.from-left {
+  transform: translateX(-40px);
+}
+.reveal-on-scroll.from-left.revealed {
+  transform: translateX(0);
+}
+
+/* Variant: from right */
+.reveal-on-scroll.from-right {
+  transform: translateX(40px);
+}
+.reveal-on-scroll.from-right.revealed {
+  transform: translateX(0);
+}
+
+/* Variant: scale */
+.reveal-on-scroll.scale-in {
+  transform: scale(0.95);
+}
+.reveal-on-scroll.scale-in.revealed {
+  transform: scale(1);
+}
+
+/* Variant: line draw */
+.reveal-on-scroll.line-draw {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.reveal-on-scroll.line-draw.revealed {
+  transform: scaleX(1);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================
+   RESPONSIVE HEADING
+   ============================================ */
+
+.responsive-heading {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 1.05;
+}
+
+/* ============================================
    SCROLLBAR
    ============================================ */
 

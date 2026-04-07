@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useCallback } from "react";
 import { stats } from "@/data/content";
+import Reveal from "@/components/RevealOnScroll";
 
 function parseNumericValue(value: string): { num: number; suffix: string } {
   const match = value.match(/^([\d.]+)(.*)$/);
@@ -78,18 +79,20 @@ function StatItem({
   }, [animate]);
 
   return (
-    <div ref={itemRef} className="relative text-center px-4">
+    <div ref={itemRef} className="relative text-center px-2 sm:px-4">
       <span
         ref={valueRef}
-        className="font-serif italic text-5xl lg:text-6xl text-gold leading-none"
+        className="font-serif italic text-4xl sm:text-5xl lg:text-6xl text-gold leading-none"
         style={{ filter: "drop-shadow(0 0 20px rgba(245,183,49,0.3))" }}
       >
         0
       </span>
-      <p className="font-sans text-xs uppercase tracking-widest text-white/40 mt-2">
+      <p className="font-sans text-[10px] sm:text-xs uppercase tracking-widest text-white/40 mt-2">
         {label}
       </p>
-      <p className="font-sans text-[11px] text-white/20 mt-1">{detail}</p>
+      <p className="font-sans text-[10px] sm:text-[11px] text-white/20 mt-1">
+        {detail}
+      </p>
 
       {/* Vertical divider on desktop */}
       {!isLast && (
@@ -101,9 +104,7 @@ function StatItem({
 
 export default function StatsBar() {
   return (
-    <section
-      className="relative bg-violet-dark section-padding overflow-hidden"
-    >
+    <section className="relative bg-violet-dark section-padding overflow-hidden">
       {/* Decorative radial spotlight */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -115,17 +116,19 @@ export default function StatsBar() {
       {/* Grid overlay */}
       <div className="absolute inset-0 grid-bg pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8">
-        {stats.map((stat, i) => (
-          <StatItem
-            key={stat.label}
-            value={stat.value}
-            label={stat.label}
-            detail={stat.detail}
-            isLast={i === stats.length - 1}
-          />
-        ))}
-      </div>
+      <Reveal>
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-4 sm:gap-y-12 sm:gap-x-8">
+          {stats.map((stat, i) => (
+            <StatItem
+              key={stat.label}
+              value={stat.value}
+              label={stat.label}
+              detail={stat.detail}
+              isLast={i === stats.length - 1}
+            />
+          ))}
+        </div>
+      </Reveal>
     </section>
   );
 }
