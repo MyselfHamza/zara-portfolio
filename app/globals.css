@@ -1,26 +1,258 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* --- Color Palette --- */
+  --violet: #4A1D8E;
+  --violet-light: #6B3FA0;
+  --violet-dark: #351466;
+  --coral: #FF6B6B;
+  --coral-light: #FF8A8A;
+  --coral-dark: #E05555;
+  --gold: #F5B731;
+  --gold-light: #F7CA5A;
+  --background: #FFFFFF;
+  --foreground: #1A1A2E;
+  --surface: #F8F7FC;
+  --surface-alt: #EDECF5;
+  --muted: #6C6B7B;
+  --border: #E2E0EF;
+  --card-shadow: 0 1px 3px rgba(74, 29, 142, 0.06), 0 1px 2px rgba(74, 29, 142, 0.04);
+  --card-shadow-hover: 0 10px 25px rgba(74, 29, 142, 0.08), 0 4px 10px rgba(74, 29, 142, 0.04);
+
+  /* --- Font Vars --- */
+  --font-jakarta: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-instrument: "Instrument Serif", Georgia, serif;
+
+  /* --- Easing --- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-violet: var(--violet);
+  --color-violet-light: var(--violet-light);
+  --color-violet-dark: var(--violet-dark);
+  --color-coral: var(--coral);
+  --color-coral-light: var(--coral-light);
+  --color-coral-dark: var(--coral-dark);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-jakarta);
+  --font-serif: var(--font-instrument);
+  --font-display: var(--font-jakarta);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ============================================
+   BASE
+   ============================================ */
+
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+a, button {
+  transition-timing-function: var(--ease-out-expo);
+  transition-duration: 0.3s;
+}
+
+::selection { background: rgba(255, 107, 107, 0.2); color: var(--violet); }
+:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; border-radius: 4px; }
+
+/* ============================================
+   LAYOUT UTILITIES
+   ============================================ */
+
+.section-padding { padding-top: 5rem; padding-bottom: 5rem; }
+@media (min-width: 768px) { .section-padding { padding-top: 7rem; padding-bottom: 7rem; } }
+
+.container-narrow {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+@media (max-width: 640px) { .container-narrow { padding-left: 1.25rem; padding-right: 1.25rem; } }
+
+/* ============================================
+   NOISE TEXTURE OVERLAY
+   ============================================ */
+
+.noise-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  mix-blend-mode: overlay;
+}
+
+/* ============================================
+   GRID BACKGROUND PATTERN
+   ============================================ */
+
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* ============================================
+   GLASS MORPHISM
+   ============================================ */
+
+.glass {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.glass-strong {
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ============================================
+   BADGES & CARDS
+   ============================================ */
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 1rem;
+  background: rgba(255, 107, 107, 0.08);
+  color: var(--coral-dark);
+  border: 1px solid rgba(255, 107, 107, 0.15);
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.card-premium {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 4px 24px rgba(74, 29, 142, 0.06);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  transition: all 0.4s var(--ease-out-expo);
+}
+.card-premium:hover {
+  box-shadow: 0 12px 40px rgba(74, 29, 142, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--violet) 0%, var(--coral) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.stat-value {
+  font-family: var(--font-instrument);
+  font-style: italic;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+  text-shadow: 0 0 30px rgba(245, 183, 49, 0.3), 0 0 60px rgba(245, 183, 49, 0.1);
+}
+@media (min-width: 768px) { .stat-value { font-size: 3.5rem; } }
+
+/* ============================================
+   SECTION DARK
+   ============================================ */
+
+.section-dark { background: var(--violet); color: white; }
+
+.icon-box {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, rgba(74, 29, 142, 0.08), rgba(255, 107, 107, 0.06));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(74, 29, 142, 0.06);
+}
+
+.section-divider {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+}
+
+/* ============================================
+   KEYFRAMES
+   ============================================ */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes draw-line {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+@keyframes marquee-reverse {
+  0% { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+.animate-marquee { animation: marquee 30s linear infinite; will-change: transform; }
+.animate-marquee-reverse { animation: marquee-reverse 30s linear infinite; will-change: transform; }
+.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
